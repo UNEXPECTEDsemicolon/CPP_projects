@@ -1,0 +1,2 @@
+CMakeLists.txt not found in /home/max/Документы/C_projects/Homework1 Select CMakeLists.txt
+CMake executable is incorrect Configure Disable profile

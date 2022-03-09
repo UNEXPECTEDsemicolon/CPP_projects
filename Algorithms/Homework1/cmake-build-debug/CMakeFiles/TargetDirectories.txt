@@ -1,0 +1,3 @@
+C:/Users/maxim/Documents/MyProjects/C_projects/Homework1/cmake-build-debug/CMakeFiles/Homework1.dir
+C:/Users/maxim/Documents/MyProjects/C_projects/Homework1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/maxim/Documents/MyProjects/C_projects/Homework1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

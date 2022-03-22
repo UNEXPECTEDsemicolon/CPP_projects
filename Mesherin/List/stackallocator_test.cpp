@@ -17,7 +17,7 @@
 #define cerr cout
 
 //#include "stackallocator.cpp"
-#include "list.h"
+#include "list2.h"
 
 //template<typename T, typename Alloc = std::allocator<T>>
 //using List = std::list<T, Alloc>;
@@ -80,6 +80,7 @@ void BasicListTest(Alloc alloc = Alloc()) {
 
     const auto copy = lst;
     assert(lst.size() == 5);
+    std::cout << "size: " << copy.size() << '\n';
     assert(copy.size() == 5);
     // now both lists are 8 9 6 7 2
 
@@ -190,7 +191,9 @@ void TestAccountant(Alloc alloc = Alloc()) {
     
     {
         List<Accountant, Alloc> lst(5, alloc);
+        std::cout << "size: " << lst.size() << '\n'; // TODO
         assert(lst.size() == 5);
+        std::cout << "ctor_calls: " << Accountant::ctor_calls << '\n'; // TODO
         assert(Accountant::ctor_calls == 5);
 
         List<Accountant, Alloc> another = lst;

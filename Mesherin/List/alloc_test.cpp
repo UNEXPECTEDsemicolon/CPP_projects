@@ -1,5 +1,5 @@
 #include <iostream>
-#include "list.h"
+#include "list2.h"
 #include <deque>
 #include <vector>
 //#include <list>
@@ -13,8 +13,6 @@ int main() {
     d.push_front(6);
     d.pop_back();
     d.push_front(7);
-    auto begin = d.begin();
-    std::cout << std::is_assignable< decltype(begin), decltype(d.cbegin())>::value << '\n';
-    begin = d.cbegin();
-    std::cout << (*(d.begin())) << '\n';
+    auto rit = d.cend();
+    std::cout << (*--rit) << '\n';
 }

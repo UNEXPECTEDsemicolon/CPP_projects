@@ -1,13 +1,23 @@
 #include <iostream>
-#include <vector>
+//#include "deque_test.h"
 
-struct My {
-    int a = 0;
+class A {
+private:
+    int x = 0;
+public:
+    class B {
+    public:
+        A* origin;
+        B(A* origin): origin(origin) {}
+        void print() {
+            std::cout << origin->x << '\n';
+        }
+    };
+    A(int x): x(x) {};
 };
 
 int main() {
-//    auto a = My{2};
-    std::vector<int> v(3, 5);
-    v[1] = 6;
-//    std::cout << (v.begin()->a) << '\n';
+    auto a = A(5);
+    typename A::B u(&a);
+    u.print();
 }

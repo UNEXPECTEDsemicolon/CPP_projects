@@ -16,8 +16,8 @@
 
 #define cerr cout
 
-//#include "stackallocator.cpp"
-#include "list.h"
+#include "stackallocator.cpp"
+//#include "list.h"
 //
 //template<typename T, typename Alloc = std::allocator<T>>
 //using List = std::list<T, Alloc>;
@@ -575,6 +575,9 @@ int main() {
             std::bidirectional_iterator_tag>::value);
 
     BasicListTest<>();
+
+//    while (true);
+
 
     std::cerr << "Test 1 (BasicTest) with std::allocator passed. Now will repeat with StackAllocator" << std::endl;
 

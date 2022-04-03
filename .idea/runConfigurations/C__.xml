@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="C++" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$FileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPP_projects" TARGET_NAME="My c++ target" CONFIG_NAME="My c++ target" RUN_PATH="a.exe">
+    <method v="2">
+      <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="81248457-f811-4669-ad60-780160fc6d39" name="My c++ target" defaultType="TOOL">
+      <configuration id="6855b2e9-5275-47c6-a7bc-17a4884e800a" name="My c++ target" toolchainName="MinGW">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_c++" />
+        </build>
+        <clean type="TOOL">
+          <tool actionId="Tool_External Tools_c++" />
+        </clean>
+      </configuration>
+    </target>
+  </component>
+</project>

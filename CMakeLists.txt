@@ -1,0 +1,140 @@
+cmake_minimum_required(VERSION 3.20)
+project(CPP_projects)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(Mesherin/biginteger)
+include_directories(Mesherin/biginteger/long_arithm)
+include_directories(Mesherin/deque)
+include_directories(Mesherin/deque/haha)
+include_directories(Mesherin/geometry)
+include_directories(Mesherin/List)
+include_directories(Mesherin/matrix)
+include_directories(Mesherin/matrix/haha)
+include_directories(Mesherin/string)
+
+add_executable(CPP_projects
+        Algorithms/Homework1/AVL/avl.cpp
+        Algorithms/Homework1/Babichev/battle.cpp
+        Algorithms/Homework1/Babichev/bits.cpp
+        Algorithms/Homework1/Babichev/book.cpp
+        Algorithms/Homework1/Babichev/brackets.cpp
+        Algorithms/Homework1/Babichev/brackets_stack.cpp
+        Algorithms/Homework1/Babichev/brokers.cpp
+        Algorithms/Homework1/Babichev/diplomas.cpp
+        Algorithms/Homework1/Babichev/ES.cpp
+        Algorithms/Homework1/Babichev/greatest_k.cpp
+        Algorithms/Homework1/Babichev/greatest_k2.cpp
+        Algorithms/Homework1/Babichev/greatest_k3.cpp
+        Algorithms/Homework1/Babichev/histogram.cpp
+        Algorithms/Homework1/Babichev/histogram2.cpp
+        Algorithms/Homework1/Babichev/inversions.cpp
+        Algorithms/Homework1/Babichev/main.cpp
+        Algorithms/Homework1/Babichev/median.cpp
+        Algorithms/Homework1/Babichev/merge.cpp
+        Algorithms/Homework1/Babichev/minmax.cpp
+        Algorithms/Homework1/Babichev/mystack.cpp
+        Algorithms/Homework1/Babichev/pair-sum.cpp
+        Algorithms/Homework1/Babichev/RMQ.cpp
+        Algorithms/Homework1/Babichev/stack_postfix.cpp
+        Algorithms/Homework1/Babichev/vega.cpp
+        Algorithms/Homework1/Dynamic/bankomat.cpp
+        Algorithms/Homework1/Dynamic/bankomat2.cpp
+        Algorithms/Homework1/Dynamic/cosmozoo.cpp
+        Algorithms/Homework1/Dynamic/decompositions.cpp
+        Algorithms/Homework1/Dynamic/gvozd.cpp
+        Algorithms/Homework1/Dynamic/ics.cpp
+        Algorithms/Homework1/Dynamic/krat.cpp
+        Algorithms/Homework1/Dynamic/peace.cpp
+        Algorithms/Homework1/Dynamic/phone.cpp
+        Algorithms/Homework1/Dynamic/post.cpp
+        Algorithms/Homework1/Dynamic/sailfish.cpp
+        Algorithms/Homework1/Dynamic/sequence.cpp
+        Algorithms/Homework1/Dynamic/squares.cpp
+        Algorithms/Homework1/Dynamic/subset.cpp
+        Algorithms/Homework1/Dynamic/subset2.cpp
+        Algorithms/Homework1/Dynamic/subset_fast.cpp
+        Algorithms/Homework1/Dynamic/triangle.cpp
+        Algorithms/Homework1/Dynamic/ways.cpp
+        Algorithms/Homework1/fenvic/bigbrother.cpp
+        Algorithms/Homework1/fenvic/bigbrother2.cpp
+        Algorithms/Homework1/fenvic/bigbrother3.cpp
+        Algorithms/Homework1/fenvic/bigbrother4.cpp
+        Algorithms/Homework1/fenvic/fffenwik.cpp
+        Algorithms/Homework1/fenvic/include.cpp
+        Algorithms/Homework1/fenvic/peremen.cpp
+        Algorithms/Homework1/fenvic/rvq.cpp
+        Algorithms/Homework1/fenvic/stars.cpp
+        Algorithms/Homework1/fenvic/structure.cpp
+        Algorithms/Homework1/Graphs/eulerian.cpp
+        Algorithms/Homework1/Graphs/graph_1.cpp
+        Algorithms/Homework1/Graphs/graph_2.cpp
+        Algorithms/Homework1/Graphs/graph_4.cpp
+        Algorithms/Homework1/Graphs/love.cpp
+        Algorithms/Homework1/LineAge/A3.cpp
+        Algorithms/Homework1/LineAge/B3.cpp
+        Algorithms/Homework1/LineAge/C3.cpp
+        Algorithms/Homework1/LineAge/cmi.cpp
+        Algorithms/Homework1/LineAge/comet.cpp
+        Algorithms/Homework1/LineAge/D3.cpp
+        Algorithms/Homework1/LineAge/E3.cpp
+        Algorithms/Homework1/LineAge/F3.cpp
+        Algorithms/Homework1/LineAge/G3.cpp
+        Algorithms/Homework1/LineAge/H3.cpp
+        Algorithms/Homework1/LineAge/I3.cpp
+        Algorithms/Homework1/LineAge/matrices.cpp
+        Algorithms/Homework1/qsort/1.cpp
+        Algorithms/Homework1/qsort/3.cpp
+        Algorithms/Homework1/qsort/antiqsort.cpp
+        Algorithms/Homework1/qsort/binomheap.cpp
+        Algorithms/Homework1/qsort/first.cpp
+        Algorithms/Homework1/qsort/flat.cpp
+        Algorithms/Homework1/qsort/heap.cpp
+        Algorithms/Homework1/qsort/k_order_stat.cpp
+        Algorithms/Homework1/qsort/layer.cpp
+        Algorithms/Homework1/qsort/LSD.cpp
+        Algorithms/Homework1/qsort/minmax.cpp
+        Algorithms/Homework1/qsort/number.cpp
+        Algorithms/Homework1/qsort/table.cpp
+        Algorithms/Homework1/adiv.cpp
+        Algorithms/Homework1/SET.cpp
+        Mesherin/argv/1.0.cpp
+        Mesherin/biginteger/long_arithm/bn.h
+        Mesherin/biginteger/long_arithm/div.cpp
+        Mesherin/biginteger/long_arithm/fib.cpp
+        Mesherin/biginteger/long_arithm/main.cpp
+        Mesherin/biginteger/long_arithm/test.cpp
+        Mesherin/biginteger/1.2.1.cpp
+        Mesherin/biginteger/1.2.2.cpp
+        Mesherin/biginteger/1.2.cpp
+        Mesherin/biginteger/biginteger.h
+        Mesherin/biginteger/temp_mul.cpp
+        Mesherin/deque/haha/deque.h
+        Mesherin/deque/haha/matrix.h
+        Mesherin/deque/deque.h
+        Mesherin/deque/deque2.h
+        Mesherin/deque/deque7.h
+        Mesherin/deque/deque_test.cpp
+        Mesherin/deque/deque_test.h
+        Mesherin/deque/deque_with_good_pop.h
+        Mesherin/deque/test.cpp
+        Mesherin/geometry/1.4.cpp
+        Mesherin/geometry/geometry.h
+        Mesherin/geometry/geometry_test.cpp
+        Mesherin/List/alloc_test.cpp
+        Mesherin/List/enable_if_test.cpp
+        Mesherin/List/hello_world.cpp
+        Mesherin/List/list.h
+        Mesherin/List/list0.h
+        Mesherin/List/list3.h
+        Mesherin/List/Node_swap.h
+        Mesherin/List/stackallocator.cpp
+        Mesherin/List/stackallocator_test.cpp
+        Mesherin/List/strange_test.cpp
+        Mesherin/matrix/haha/deque.h
+        Mesherin/matrix/haha/matrix.h
+        Mesherin/matrix/1.3.cpp
+        Mesherin/matrix/1.3_no_inheritance.cpp
+        Mesherin/matrix/matrix.h
+        Mesherin/matrix/matrix_test.cpp
+        Mesherin/string/string.h)

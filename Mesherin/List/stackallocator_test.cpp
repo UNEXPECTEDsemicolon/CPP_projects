@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <sstream>
 #include <cassert>
-#include <sys/resource.h>
+//#include <sys/resource.h>
 
 #include <type_traits> //-----------
 
@@ -546,27 +546,27 @@ void TestPerformance() {
 
 int main() {
 
-    const rlim_t kStackSize = 210 * 1024 * 1024;   // min stack size = 16 MB
-    struct rlimit rl;
-    int result;
-
-    result = getrlimit(RLIMIT_STACK, &rl);
-    if (result != 0) {
-        std::cerr << "Failed to get current stack size\n";
-        abort();
-    }
-    
-    std::cout << rl.rlim_cur << '\n';
-
-    if (rl.rlim_cur < kStackSize) {
-        rl.rlim_cur = kStackSize;
-        result = setrlimit(RLIMIT_STACK, &rl);
-        if (result != 0) {
-            std::cerr << "Failed to set bigger stack size\n";
-            abort();
-        }
-        std::cerr << "Stack size is successfully set to " << kStackSize << '\n';
-    }
+//    const rlim_t kStackSize = 210 * 1024 * 1024;   // min stack size = 16 MB
+//    struct rlimit rl;
+//    int result;
+//
+//    result = getrlimit(RLIMIT_STACK, &rl);
+//    if (result != 0) {
+//        std::cerr << "Failed to get current stack size\n";
+//        abort();
+//    }
+//
+//    std::cout << rl.rlim_cur << '\n';
+//
+//    if (rl.rlim_cur < kStackSize) {
+//        rl.rlim_cur = kStackSize;
+//        result = setrlimit(RLIMIT_STACK, &rl);
+//        if (result != 0) {
+//            std::cerr << "Failed to set bigger stack size\n";
+//            abort();
+//        }
+//        std::cerr << "Stack size is successfully set to " << kStackSize << '\n';
+//    }
 
     static_assert(!std::is_assignable<decltype(*List<int>().cbegin()), int>::value);
     static_assert(!std::is_assignable<List<int>::iterator, List<int>::const_iterator>::value);

@@ -3,6 +3,15 @@ project(CPP_projects)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include_directories(Algorithms/Homework1)
+include_directories(Algorithms/Homework1/AVL)
+include_directories(Algorithms/Homework1/Babichev)
+include_directories(Algorithms/Homework1/Dynamic)
+include_directories(Algorithms/Homework1/fenvic)
+include_directories(Algorithms/Homework1/Graphs)
+include_directories(Algorithms/Homework1/LineAge)
+include_directories(Algorithms/Homework1/qsort)
+
 include_directories(Mesherin/biginteger)
 include_directories(Mesherin/biginteger/long_arithm)
 include_directories(Mesherin/deque)
@@ -70,6 +79,7 @@ add_executable(CPP_projects
         Algorithms/Homework1/Graphs/graph_1.cpp
         Algorithms/Homework1/Graphs/graph_2.cpp
         Algorithms/Homework1/Graphs/graph_4.cpp
+        Algorithms/Homework1/Graphs/dijkstra.cpp
         Algorithms/Homework1/Graphs/love.cpp
         Algorithms/Homework1/LineAge/A3.cpp
         Algorithms/Homework1/LineAge/B3.cpp
@@ -137,4 +147,4 @@ add_executable(CPP_projects
         Mesherin/matrix/1.3_no_inheritance.cpp
         Mesherin/matrix/matrix.h
         Mesherin/matrix/matrix_test.cpp
-        Mesherin/string/string.h)
+        Mesherin/string/string.h Algorithms/Homework1/Graphs/ancestor.cpp Algorithms/Homework1/Graphs/loop.cpp Algorithms/Homework1/Graphs/top.cpp Algorithms/Homework1/Graphs/lockdown.cpp Algorithms/Homework1/Graphs/isolation2.cpp Algorithms/Homework1/Graphs/empire.cpp)

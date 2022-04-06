@@ -2,10 +2,6 @@
 #include <stdio.h>
 #include <vector>
 
-//std::vector<std::vector<int>> g;
-//std::vector<std::vector<bool>> used;
-//std::vector<int> ans;
-
 bool read_int_unlocked(int & out) {
     int c = getchar_unlocked();
     int x = 0;
@@ -27,11 +23,11 @@ bool read_int_unlocked(int & out) {
     return true;
 }
 
-void euler(int v, std::vector<std::vector<int>>& g, std::vector<std::vector<bool>>& used, std::vector<int>& ans) {
-    for (size_t i = 0; i < g[v].size(); ++i) {
+void euler(int v, int**& g, int*& sizes, bool**& used, std::vector<int>& ans) {
+    for (size_t i = 0; i < sizes[v]; ++i) {
         if (!used[v][g[v][i]]) {
             used[v][g[v][i]] = true;
-            euler(g[v][i], g, used, ans);
+            euler(g[v][i], g, sizes, used, ans);
         }
     }
     ans.push_back(v);
@@ -41,9 +37,16 @@ int main() {
     int n, a;
     scanf("%d %d", &n, &a);
 //    std::cin >> n >> a;
-    auto g = std::vector<std::vector<int>>(n, std::vector<int>());
-//    g.assign(n, std::vector<int>());
-    auto used = std::vector<std::vector<bool>>(n, std::vector<bool>(n, false));
+    auto g = new int* [n];
+    auto sizes = new int [n];
+    auto used = new bool* [n];
+    for (int i = 0; i < n; ++i) {
+        g[i] = new int[n];
+        sizes[i] = 0;
+        used[i] = new bool [n];
+        for (int j = 0; j < n; ++j)
+            used[i][j] = false;
+    }
     auto ans = std::vector<int>();
     size_t m = 0;
     for (int i = 0; i < n; ++i) {
@@ -52,13 +55,21 @@ int main() {
             read_int_unlocked(x);
 //            std::cin >> x;
             if (!x && i != j) {
-                g[i].push_back(j);
+                g[i][sizes[i]++] = j;
                 ++m;
             }
         }
     }
     ans.reserve(m);
-    euler(--a, g, used, ans);
-    for (size_t i = ans.size() - 1; i >= 1; --i)
-        printf("%d %d\n", ans[i] + 1, ans[i - 1] + 1);
+    euler(--a, g, sizes, used, ans);
+    if (ans.size())
+        for (size_t i = ans.size() - 1; i >= 1; --i)
+            printf("%d %d\n", ans[i] + 1, ans[i - 1] + 1);
+    for (int i = 0; i < n; ++i) {
+        delete[] g[i];
+        delete [] used[i];
+    }
+    delete [] g;
+    delete [] sizes;
+    delete [] used;
 }

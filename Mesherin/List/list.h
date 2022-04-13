@@ -6,17 +6,14 @@
 template<size_t N>
 struct StackStorage {
     alignas(std::max_align_t) uint8_t data[N];
-    uint8_t* map[N];
     uint8_t* begin = data;
 
-    StackStorage() noexcept {
-        for (size_t i = 0; i < N; ++i)
-            map[i] = nullptr;
-    };
+    StackStorage() noexcept {};
 
     StackStorage(const StackStorage<N>&) = delete;
+
     StackStorage<N>& operator=(const StackStorage<N>&) = delete;
-    
+
     size_t pos() const noexcept {
         return begin - data;
     }
@@ -31,12 +28,17 @@ public:
     using value_type = T;
     using type = T;
 
-    StackAllocator() noexcept;
+    StackAllocator() = delete;
 
     StackAllocator(StackStorage<N>& storage) noexcept: storage(&storage) {}
 
     template<class T_>
     StackAllocator(const StackAllocator<T_, N>& source) noexcept: storage(source.storage) {}
+
+    template<class T_>
+    StackAllocator(StackAllocator<T_, N>&& source) noexcept: storage(source.storage) {
+        source.storage = nullptr;
+    }
 
     template<class T_>
     StackAllocator<T, N>& operator=(const StackAllocator<T_, N>& source) noexcept {
@@ -45,8 +47,6 @@ public:
 
     T* allocate(size_t n) {
         auto delta = (alignof(T) - (storage->pos()) % alignof(T)) % alignof(T);
-        storage->map[storage->pos() + delta] = storage->map[storage->pos()];
-        storage->map[storage->pos()] = nullptr;
         storage->begin += delta;
         auto res = reinterpret_cast<T*>(storage->begin);
         storage->begin += n * sizeof(T);
@@ -54,16 +54,8 @@ public:
     }
 
     void deallocate(T*& ptr, size_t n) noexcept {
-        if (ptr + n == reinterpret_cast<T*>(storage->begin)) {
+        if (ptr + n == reinterpret_cast<T*>(storage->begin))
             storage->begin -= n * sizeof(T);
-            uint8_t* new_begin;
-            while ((new_begin = storage->map[storage->pos()])) {
-                storage->map[storage->pos()] = nullptr;
-                storage->begin = new_begin;
-            }
-        } else {
-            storage->map[reinterpret_cast<uint8_t*>(ptr) - storage->data + n] = reinterpret_cast<uint8_t*>(ptr);
-        }
         ptr = nullptr;
     }
 
@@ -93,19 +85,45 @@ private:
         T* value = nullptr;
 
         Node() = default;
+
+        Node(Node* const& prev, Node* const& next, T* const& value) noexcept:
+            prev(prev), next(next), value(value) {}
+
         Node(const Node&) = default;
+//        Node(Node&&) noexcept = default;
+
+        Node(Node&& source) noexcept: Node(source) { // TODO: test default move constructor
+            source.prev = nullptr;
+            source.next = nullptr;
+            source.value = nullptr;
+        }
+
         Node& operator=(const Node&) = default;
+//        Node& operator=(Node&&) noexcept = default;
+
+        Node& operator=(Node&& source) noexcept {
+            *this = source;
+            source.prev = nullptr;
+            source.next = nullptr;
+            source.value = nullptr;
+            return *this;
+        }
+
+
     };
+
 public:
     template<class T_>
-    class base_iterator: public std::iterator<std::bidirectional_iterator_tag, T_> {
+    class base_iterator : public std::iterator<std::bidirectional_iterator_tag, T_> {
     private:
-        Node *node;
+        Node* node;
 
-    public:
         base_iterator(Node* node) noexcept: node(node) {}
 
-        template<class T__, typename = std::enable_if_t<std::is_same<T__, T>::value && std::is_same<T_, const T>::value>>
+    public: // TODO ?
+
+        template<class T__, typename = std::enable_if_t<
+                std::is_same<T__, T>::value && std::is_same<T_, const T>::value>>
         base_iterator(const base_iterator<T__>& source) noexcept: node(source.node) {};
 
         template<class T__>
@@ -115,7 +133,8 @@ public:
             std::swap(node, right.node);
         }
 
-        template<class T__, typename = std::enable_if_t<std::is_same<T__, T>::value && std::is_same<T_, const T>::value>>
+        template<class T__, typename = std::enable_if_t<
+                std::is_same<T__, T>::value && std::is_same<T_, const T>::value>>
         base_iterator<T_>& operator=(const base_iterator<T__>& source) noexcept {
             auto tmp = source;
             swap(tmp);
@@ -186,7 +205,7 @@ public:
         size_t operator-(const base_iterator<T_>& right) const noexcept {
             size_t res = 0;
             for (auto it = right; *it != node; ++res, ++it)
-            return res;
+                return res;
         }
 
         T_& operator*() noexcept {
@@ -204,12 +223,14 @@ public:
         const T_* operator->() const noexcept {
             return &(this->operator*());
         }
-        friend std::conditional_t<std::is_same<T_,const T>::value,
-                                  base_iterator<T>,
-                                  base_iterator<const T>>;
+
+        friend std::conditional_t<std::is_same<T_, const T>::value,
+                base_iterator<T>,
+                base_iterator<const T>>;
         friend List<T, Allocator>;
     };
 
+public:
     using iterator = base_iterator<T>;
     using const_iterator = base_iterator<const T>;
     using reverse_iterator = std::reverse_iterator<iterator>;
@@ -228,9 +249,11 @@ public:
     iterator begin() noexcept {
         return iterator(end_->next);
     }
+
     const_iterator cbegin() const noexcept {
         return const_iterator(end_->next);
     }
+
     const_iterator begin() const noexcept {
         return cbegin();
     }
@@ -238,9 +261,11 @@ public:
     iterator end() noexcept {
         return iterator(end_);
     }
+
     const_iterator cend() const noexcept {
         return const_iterator(end_);
     }
+
     const_iterator end() const noexcept {
         return cend();
     }
@@ -248,9 +273,11 @@ public:
     reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
     }
+
     const_reverse_iterator crbegin() const noexcept {
         return const_reverse_iterator(cend());
     }
+
     const_reverse_iterator rbegin() const noexcept {
         return crbegin();
     }
@@ -258,16 +285,17 @@ public:
     reverse_iterator rend() noexcept {
         return reverse_iterator(begin());
     }
+
     const_reverse_iterator crend() const noexcept {
         return const_reverse_iterator(cbegin());
     }
+
     const_reverse_iterator rend() const noexcept {
         return crend();
     }
 
-private:
     template<typename... Args>
-    void emplace_insert(const const_iterator& it, Args&... args) {
+    void emplace(const const_iterator& it, Args&&... args) {
         auto new_node = AllocTraitsNode::allocate(alloc_node, 1);
         try {
             AllocTraitsNode::construct(alloc_node, new_node, Node());
@@ -277,7 +305,7 @@ private:
         }
         new_node->value = AllocTraitsT::allocate(alloc, 1);
         try {
-            AllocTraitsT::construct(alloc, new_node->value, args...);
+            AllocTraitsT::construct(alloc, new_node->value, std::forward<Args>(args)...);
         } catch (...) {
             AllocTraitsT::deallocate(alloc, new_node->value, 1);
             AllocTraitsNode::destroy(alloc_node, new_node);
@@ -294,29 +322,49 @@ private:
         ++size_;
     }
 
-public:
     void insert(const const_iterator& it, const T& value) {
-        emplace_insert(it, value);
+        emplace(it, value);
+    }
+    void insert(const const_iterator& it, T&& value) noexcept {
+        emplace(it, std::move(value));
     }
 
-private:
+    template<typename InputIt>
+    void insert(const const_iterator& it, InputIt first, InputIt last) {
+        auto begin_ = it - 1;
+        for (auto iit = first; iit != last; ++iit) {
+            try {
+                insert(it, *iit);
+            } catch (...) {
+                for (auto rit = it - 1; rit != begin_; --rit)
+                    erase(rit);
+                throw;
+            }
+        }
+    }
+
     template<typename... Args>
-    void emplace_push_back(Args&... args) {
-        emplace_insert(end(), args...);
+    void emplace_push_back(Args&&... args) {
+        emplace(end(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void emplace_push_front(Args&... args) {
-        emplace_insert(end() + 1, args...);
+    void emplace_push_front(Args&&... args) {
+        emplace(end() + 1, std::forward<Args>(args)...);
     }
 
-public:
     void push_back(const T& value) {
-        insert(end(), value);
+        emplace_push_back(value);
+    }
+    void push_back(T&& value) noexcept {
+        emplace_push_back(std::move(value));
     }
 
     void push_front(const T& value) {
-        insert(end() + 1, value);
+        emplace_push_front(value);
+    }
+    void push_front(T&& value) noexcept {
+        emplace_push_front(std::move(value));
     }
 
     void erase(const const_iterator& it) noexcept {
@@ -354,34 +402,46 @@ public:
         delete_list();
     }
 
-    List(const Allocator& alloc = Allocator()): alloc(alloc) {
+    List(const Allocator& alloc = Allocator()) : alloc(alloc) {
         end_ = AllocTraitsNode::allocate(alloc_node, 1);
-        AllocTraitsNode::construct(alloc_node, end_, Node{end_, end_, nullptr});
+        AllocTraitsNode::construct(alloc_node, end_, Node(end_, end_, nullptr));
     }
 
-    List(size_t count, const T& value, const Allocator& alloc = Allocator()): List(alloc) {
+    List(size_t count, const T& value, const Allocator& alloc = Allocator()) : List(alloc) {
         for (size_t i = 0; i < count; ++i) {
             try {
                 push_back(value);
             } catch (...) {
                 delete_list();
+                throw;
             }
         }
     }
 
-    List(size_t count, const Allocator& alloc = Allocator()): List(alloc) {
+    List(size_t count, const Allocator& alloc = Allocator()) : List(alloc) {
         for (size_t i = 0; i < count; ++i) {
             try {
                 emplace_push_back();
             } catch (...) {
                 delete_list();
+                throw;
             }
         }
     }
 
+    template<typename InputIt>
+    List(InputIt first, InputIt last, const Allocator& allocator): List(alloc) {
+        try {
+            insert(end(), first, last);
+        } catch (...) {
+            delete_list();
+            throw;
+        }
+    }
+
 private:
-    List(const List& source, bool pocca)
-        : List(pocca ? Allocator(source.alloc) : AllocTraitsT::select_on_container_copy_construction(source.alloc)) {
+    List(const List& source, const Allocator& alloc)
+            : List(alloc) {
         for (auto it = source.begin(); it != source.end(); ++it) {
             try {
                 push_back(*it);
@@ -391,8 +451,20 @@ private:
         }
     }
 
+    template<typename Allocator_, typename AllocatorNode_>
+    List(List&& source, Allocator_&& alloc, AllocatorNode_&& alloc_node) noexcept:
+        alloc(std::forward<Allocator_>(alloc)),
+        alloc_node(std::forward<AllocatorNode_>(alloc_node)),
+        end_(source.end_),
+        size_(source.size_) {
+        source.end_ = nullptr;
+        source.size_ = 0;
+    }
+
 public:
-    List(const List& source): List(source, false) {}
+    List(const List& source) : List(source, AllocTraitsT::select_on_container_copy_construction(source.alloc)) {}
+
+    List(List&& source) noexcept: List(std::move(source), std::move(source.alloc), std::move(source.alloc_node)) {}
 
     void swap(List& right) noexcept {
         std::swap(alloc, right.alloc);
@@ -402,7 +474,18 @@ public:
     }
 
     List& operator=(const List& source) {
-        auto tmp = List<T, Allocator>(source, AllocTraitsT::propagate_on_container_copy_assignment::value);
+        auto tmp = List<T, Allocator>(source, AllocTraitsT::propagate_on_container_copy_assignment::value ? Allocator(
+                source.alloc) : source.alloc);
+        swap(tmp);
+        return *this;
+    }
+
+    List& operator=(List&& source) noexcept {
+        auto tmp = List<T, Allocator>(std::move(source),
+                                      AllocTraitsT::propagate_on_container_move_assignment::value
+                                          ? Allocator(source.alloc) : std::move(source.alloc),
+                                      AllocTraitsT::propagate_on_container_move_assignment::value
+                                          ? AllocatorNode(source.alloc_node) : std::move(source.alloc_node));
         swap(tmp);
         return *this;
     }
@@ -413,5 +496,16 @@ public:
 
     size_t size() const noexcept {
         return size_;
+    }
+
+    void move_node(iterator& source, iterator& dest) noexcept {
+        auto src_node = source.node;
+        auto dst_node = dest.node;
+        src_node->next->prev = src_node->prev;
+        src_node->prev->next = src_node->next;
+        src_node->prev = dst_node->prev;
+        src_node->prev->next = src_node;
+        src_node->next = dst_node;
+        dst_node->prev = src_node;
     }
 };

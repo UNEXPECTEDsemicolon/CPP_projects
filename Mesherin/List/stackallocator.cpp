@@ -27,7 +27,7 @@ public:
     using value_type = T;
     using type = T;
 
-    StackAllocator() noexcept;
+    StackAllocator() = delete;
 
     StackAllocator(StackStorage<N>& storage) noexcept: storage(&storage) {}
 
@@ -367,19 +367,19 @@ public:
     }
 
 private:
-    List(const List& source, bool pocca)
-            : List(pocca ? Allocator(source.alloc) : AllocTraitsT::select_on_container_copy_construction(source.alloc)) {
-        for (auto it = source.begin(); it != source.end(); ++it) {
-            try {
-                push_back(*it);
-            } catch (...) {
-                delete_list();
-            }
+    List(const List& source, const Allocator& alloc)
+        : List(alloc) {
+    for (auto it = source.begin(); it != source.end(); ++it) {
+        try {
+            push_back(*it);
+        } catch (...) {
+            delete_list();
         }
+    }
     }
 
 public:
-    List(const List& source): List(source, false) {}
+    List(const List& source): List(source, AllocTraitsT::select_on_container_copy_construction(source.alloc)) {}
 
     void swap(List& right) noexcept {
         std::swap(alloc, right.alloc);
@@ -389,7 +389,7 @@ public:
     }
 
     List& operator=(const List& source) {
-        auto tmp = List<T, Allocator>(source, AllocTraitsT::propagate_on_container_copy_assignment::value);
+        auto tmp = List<T, Allocator>(source, AllocTraitsT::propagate_on_container_copy_assignment::value ? Allocator(source.alloc) : source.alloc);
         swap(tmp);
         return *this;
     }

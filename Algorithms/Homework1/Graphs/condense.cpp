@@ -57,6 +57,9 @@ int main() {
     for (int i = 0; i < n; ++i)
         p[i] = i;
     std::sort(p.begin(), p.end(), Comp());
+    for (auto pp: p) // !!
+        std::cout << pp << ' '; // !!
+    std::cout << '\n'; // !!
     color.assign(n, 0);
     g2 = std::vector<std::vector<int>>(n, std::vector<int>(0));
     for (int v = 0; v < n; ++v)

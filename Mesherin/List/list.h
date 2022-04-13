@@ -240,10 +240,10 @@ private:
     using AllocTraitsT = std::allocator_traits<Allocator>;
     using AllocatorNode = typename AllocTraitsT::template rebind_alloc<Node>;
     using AllocTraitsNode = std::allocator_traits<AllocatorNode>;
-    size_t size_ = 0;
+    size_t size_;
     Allocator alloc;
     AllocatorNode alloc_node = alloc;
-    Node* end_ = nullptr;
+    Node* end_;
 
 public:
     iterator begin() noexcept {
@@ -368,6 +368,7 @@ public:
     }
 
     void erase(const const_iterator& it) noexcept {
+        if (it == end()) return;
         it.node->prev->next = it.node->next;
         it.node->next->prev = it.node->prev;
         AllocTraitsT::destroy(alloc, it.node->value);
@@ -402,7 +403,7 @@ public:
         delete_list();
     }
 
-    List(const Allocator& alloc = Allocator()) : alloc(alloc) {
+    List(const Allocator& alloc = Allocator()) : alloc(alloc), size_(0) {
         end_ = AllocTraitsNode::allocate(alloc_node, 1);
         AllocTraitsNode::construct(alloc_node, end_, Node(end_, end_, nullptr));
     }
@@ -498,7 +499,7 @@ public:
         return size_;
     }
 
-    void move_node(iterator& source, iterator& dest) noexcept {
+    void move_node(iterator source, iterator dest) noexcept {
         auto src_node = source.node;
         auto dst_node = dest.node;
         src_node->next->prev = src_node->prev;

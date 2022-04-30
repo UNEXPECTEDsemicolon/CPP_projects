@@ -15,11 +15,15 @@ struct P: S {
 };
 
 int main() {
-    P p(5);
-    std::cout << p.x << '\n';
-    auto a = SharedPtr<P>(&p);
+//    P p(5);
+//    std::cout << p.x << '\n';
+    auto a = SharedPtr<P>(new P(5));
     auto s = SharedPtr<S>(a);
 //    typeid(is_base<S, P>);
-    std::cout << s->x << '\n';
+//    std::cout << s->x << '\n';
     WeakPtr<P> ws = a;
+//    std::cout << std::is_base_of<int, int>::value << '\n';
+    auto abc = makeShared<int>(8);
+    auto abc2 = abc;
+    std::cout << abc2.use_count() << '\n';
 }

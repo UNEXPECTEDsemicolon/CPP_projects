@@ -6,4 +6,11 @@
       <option name="WORKING_DIRECTORY" value="$FileDir$" />
     </exec>
   </tool>
+  <tool name="c++ Yandex" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe" />
+      <option name="PARAMETERS" value="-O2 -std=c++17 -Wall -Wextra -Werror -g $FileName$" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
+    </exec>
+  </tool>
 </toolSet>

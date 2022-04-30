@@ -1,40 +1,17 @@
 #include "matrix.h"
 
-int main() {
-    const size_t m = 20, n = 20;
-//    vector<vector<int>> vec(m, vector<int>(n, 0));
-//    for (size_t i = 0; i < m; ++i) {
-//        for (size_t j = 0; j < n; ++j) {
-//            std::cin >> vec[i][j];
-//        }
-//    }
-//    auto matr = Matrix<m, n>(vec);
-    auto matr = SquareMatrix<n>();
-//    std::cout << matr.inverted();
-    auto det = matr.det();
-    matr[0][0] /= det;
-    while(1);
-    std::cout << matr[0][0];
-//    matr *= matr;
-//    auto temp = &matr[0];
-//    std::cout << sizeof(temp) << '\n';
-//    std::cout << temp[0] << '\n';
-//    std::cout << "Hi\n";
-//    while(1);
-//    std::cout << matr * matr << '\n';
+template <size_t N>
+auto dot(Matrix<N, 1>& x, Matrix<N, 1>& y) {
+    auto G = Matrix<N, N>({{2, 0, -1}, {0, 2, 1}, {-1, 1, 2}});
+    return (x.transposed() * G * y)[0][0];
 }
 
-/*
-
--6 10
--8 2
-
-11 10
-9 2
-
-1 4
-9 2
-
-
-
- */
+int main() {
+    auto A = Matrix<3, 2>({{2, -3}, {1, 4}, {-5, 0}});
+    auto B = Matrix<2, 3>({{4, -3, 0}, {6, -2, 2}});
+    auto C = Matrix<3, 3>({{1, 2, -3}, {4, 5, 5}, {0, -3, 7}});
+//    std::cout << A * B;
+    std::cout << A * B * Rational(3) - C.transposed() * Rational(2);
+//    auto r = Rational(BigInteger("46513135154653413543513524351435435"), BigInteger("435138943514641684640613406446464264"));
+//    std::cout << r * r * r * r * r << '\n';
+}

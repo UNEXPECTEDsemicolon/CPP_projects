@@ -54,8 +54,8 @@ int main() {
 //            final_ans.push_back(i);
 //    }
 //    std::cout << final_ans.size() << '\n';
-//    for (auto a: final_ans)
-//        std::cout << a + 1 << ' ';
+//    for (auto a__: final_ans)
+//        std::cout << a__ + 1 << ' ';
 //    std::cout << '\n';
     std::cout << "0\n";
 }

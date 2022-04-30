@@ -1,0 +1,25 @@
+#include "smart_pointers.h"
+
+struct S {
+    int x;
+    S(int x): x(x) {}
+
+    S(const S& s): x(s.x) {}
+};
+
+struct P: S {
+    int y;
+    P(const S& s): S::S(s), y(s.x) {}
+
+    P(int y): S::S(y), y(y) {}
+};
+
+int main() {
+    P p(5);
+    std::cout << p.x << '\n';
+    auto a = SharedPtr<P>(&p);
+    auto s = SharedPtr<S>(a);
+//    typeid(is_base<S, P>);
+    std::cout << s->x << '\n';
+    WeakPtr<P> ws = a;
+}

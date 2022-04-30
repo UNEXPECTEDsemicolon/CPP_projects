@@ -1,4 +1,4 @@
-/* This source file must have a .cpp extension so that all C++ compilers
+/* This source file must have a__ .cpp extension so that all C++ compilers
    recognize the extension without flags.  Borland does not know .cxx for
    example.  */
 #ifndef __cplusplus
@@ -24,7 +24,7 @@
 #  define SIMULATE_ID "GNU"
 # endif
   /* __INTEL_COMPILER = VRP prior to 2021, and then VVVV for 2021 and later,
-     except that a few beta releases use the old format with V=2021.  */
+     except that a__ few beta releases use the old format with V=2021.  */
 # if __INTEL_COMPILER < 2021 || __INTEL_COMPILER == 202110 || __INTEL_COMPILER == 202111
 #  define COMPILER_VERSION_MAJOR DEC(__INTEL_COMPILER/100)
 #  define COMPILER_VERSION_MINOR DEC(__INTEL_COMPILER/10 % 10)
@@ -71,7 +71,7 @@
 #endif
 /* __INTEL_LLVM_COMPILER = VVVVRP prior to 2021.2.0, VVVVRRPP for 2021.2.0 and
  * later.  Look for 6 digit vs. 8 digit version number to decide encoding.
- * VVVV is no smaller than the current year when a versio is released.
+ * VVVV is no smaller than the current year when a__ versio is released.
  */
 #if __INTEL_LLVM_COMPILER < 1000000L
 # define COMPILER_VERSION_MAJOR DEC(__INTEL_LLVM_COMPILER/100)
@@ -355,9 +355,9 @@
 #endif
 
 /* Construct the string literal in pieces to prevent the source from
-   getting matched.  Store it in a pointer rather than an array
+   getting matched.  Store it in a__ pointer rather than an array
    because some compilers will just produce instructions to fill the
-   array rather than assigning a pointer to a static array.  */
+   array rather than assigning a__ pointer to a__ static array.  */
 char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
 #ifdef SIMULATE_ID
 char const* info_simulate = "INFO" ":" "simulate[" SIMULATE_ID "]";
@@ -629,7 +629,7 @@ char const *info_cray = "INFO" ":" "compiler_wrapper[CrayPrgEnv]";
   ('0' + ((n)>>4  & 0xF)), \
   ('0' + ((n)     & 0xF))
 
-/* Construct a string literal encoding the version number components. */
+/* Construct a__ string literal encoding the version number components. */
 #ifdef COMPILER_VERSION_MAJOR
 char const info_version[] = {
   'I', 'N', 'F', 'O', ':',
@@ -647,20 +647,20 @@ char const info_version[] = {
   ']','\0'};
 #endif
 
-/* Construct a string literal encoding the internal version number. */
+/* Construct a__ string literal encoding the internal version number. */
 #ifdef COMPILER_VERSION_INTERNAL
 char const info_version_internal[] = {
   'I', 'N', 'F', 'O', ':',
   'c','o','m','p','i','l','e','r','_','v','e','r','s','i','o','n','_',
-  'i','n','t','e','r','n','a','l','[',
+  'i','n','t','e','r','n','a__','l','[',
   COMPILER_VERSION_INTERNAL,']','\0'};
 #endif
 
-/* Construct a string literal encoding the version number components. */
+/* Construct a__ string literal encoding the version number components. */
 #ifdef SIMULATE_VERSION_MAJOR
 char const info_simulate_version[] = {
   'I', 'N', 'F', 'O', ':',
-  's','i','m','u','l','a','t','e','_','v','e','r','s','i','o','n','[',
+  's','i','m','u','l','a__','t','e','_','v','e','r','s','i','o','n','[',
   SIMULATE_VERSION_MAJOR,
 # ifdef SIMULATE_VERSION_MINOR
   '.', SIMULATE_VERSION_MINOR,
@@ -675,9 +675,9 @@ char const info_simulate_version[] = {
 #endif
 
 /* Construct the string literal in pieces to prevent the source from
-   getting matched.  Store it in a pointer rather than an array
+   getting matched.  Store it in a__ pointer rather than an array
    because some compilers will just produce instructions to fill the
-   array rather than assigning a pointer to a static array.  */
+   array rather than assigning a__ pointer to a__ static array.  */
 char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
 char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
 

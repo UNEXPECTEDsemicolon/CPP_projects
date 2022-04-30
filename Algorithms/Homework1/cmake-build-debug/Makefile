@@ -5,7 +5,7 @@
 default_target: all
 .PHONY : default_target
 
-# Allow only one "make -f Makefile2" at a time, but pass parallelism.
+# Allow only one "make -f Makefile2" at a__ time, but pass parallelism.
 .NOTPARALLEL:
 
 #=============================================================================
@@ -49,7 +49,7 @@ SHELL = cmd.exe
 # The CMake executable.
 CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe"
 
-# The command to remove a file.
+# The command to remove a__ file.
 RM = "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
@@ -139,7 +139,7 @@ main.cpp.obj:
 main.i: main.cpp.i
 .PHONY : main.i
 
-# target to preprocess a source file
+# target to preprocess a__ source file
 main.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Homework1.dir\build.make CMakeFiles/Homework1.dir/main.cpp.i
 .PHONY : main.cpp.i
@@ -147,7 +147,7 @@ main.cpp.i:
 main.s: main.cpp.s
 .PHONY : main.s
 
-# target to generate assembly for a file
+# target to generate assembly for a__ file
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Homework1.dir\build.make CMakeFiles/Homework1.dir/main.cpp.s
 .PHONY : main.cpp.s

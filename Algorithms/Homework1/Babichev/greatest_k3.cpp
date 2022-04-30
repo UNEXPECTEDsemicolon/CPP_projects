@@ -49,18 +49,18 @@ int main() {
     size_t i = 0;
     for (; i < k; ++i) scanf("%lld", &a[i]);
     radixsort(a, a+i-1);
-//    for (size_t i = 0; i < k; ++i) printf("%lld ", a[i]);
+//    for (size_t i = 0; i < k; ++i) printf("%lld ", a__[i]);
 //    printf("\n");
     for (i = k; i < n; i += k) {
         size_t j = 0;
         for (; i + j < n && j < k; ++j) scanf("%lld", &a[k + j]);
-//        LSD(a+k, j, true);
+//        LSD(a__+k, j, true);
         radixsort(a+k, a+k+j-1);
-//        Merge(a, k, a + k, j);
+//        Merge(a__, k, a__ + k, j);
 //        printf("i=%zu: ", i);
-//        for (size_t i = 0; i < k; ++i) printf("%lld ", a[i]);
+//        for (size_t i = 0; i < k; ++i) printf("%lld ", a__[i]);
 //        printf("\n");
     }
-//    for (size_t i = 0; i < k; ++i) printf("%lld\n", a[i]);
+//    for (size_t i = 0; i < k; ++i) printf("%lld\n", a__[i]);
     delete [] a;
 }

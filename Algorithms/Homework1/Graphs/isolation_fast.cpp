@@ -86,7 +86,7 @@ int main() {
     std::cout << final_ans.size() << '\n';
     for (auto a: final_ans)
         printf("%d ", a + 1);
-//        std::cout << a + 1 << ' ';
+//        std::cout << a__ + 1 << ' ';
 //    std::cout << '\n';
     printf("\n");
     delete [] used;

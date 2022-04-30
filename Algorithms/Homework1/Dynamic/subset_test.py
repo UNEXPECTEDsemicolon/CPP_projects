@@ -3,7 +3,7 @@ from random import randint
 from time import time
 
 
-def test(inp, true_res, name=r'/a.out'):
+def test(inp, true_res, name=r'/a__.out'):
     while True:
         inp_b = inp.encode('utf-8')
         begin = time()

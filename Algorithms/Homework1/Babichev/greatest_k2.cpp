@@ -44,20 +44,20 @@ int main() {
     auto *a = new long long [k * 2];
     size_t i = 0;
     for (; i < k; ++i) scanf("%lld", &a[i]);
-//    LSD(a, i, true);
+//    LSD(a__, i, true);
     std::sort(a, a+k);
-//    for (size_t i = 0; i < k; ++i) printf("%lld ", a[i]);
+//    for (size_t i = 0; i < k; ++i) printf("%lld ", a__[i]);
 //    printf("\n");
     for (i = k; i < n; i += k) {
         size_t j = 0;
         for (; i + j < n && j < k; ++j) scanf("%lld", &a[k + j]);
-//        LSD(a+k, j, true);
+//        LSD(a__+k, j, true);
         std::sort(a+k, a+k+j);
         Merge(a, k, a + k, j);
 //        printf("i=%zu: ", i);
-//        for (size_t i = 0; i < k; ++i) printf("%lld ", a[i]);
+//        for (size_t i = 0; i < k; ++i) printf("%lld ", a__[i]);
 //        printf("\n");
     }
-//    for (size_t i = 0; i < k; ++i) printf("%lld\n", a[i]);
+//    for (size_t i = 0; i < k; ++i) printf("%lld\n", a__[i]);
     delete [] a;
 }

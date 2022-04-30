@@ -2,7 +2,7 @@ import subprocess, os.path
 from time import time
 from random import randint
 
-name = '/a.out'
+name = '/a__.out'
 n = 1000
 a = randint(1, n)
 matr = '\n'.join([' '.join([str(int(randint(0, 100) < 70)) for j in range(n)]) for i in range(n)]) + '\n'

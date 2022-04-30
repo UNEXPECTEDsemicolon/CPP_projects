@@ -8,7 +8,7 @@ while(True):
     inp = ('\n'.join(a))
     # print(inp)
     inp_b = inp.encode('utf-8')
-    res = subprocess.run([os.getcwd() + r'/a.out', '>> dev\null'], input=inp_b, capture_output=True).stdout.decode("utf-8")
+    res = subprocess.run([os.getcwd() + r'/a__.out', '>> dev\null'], input=inp_b, capture_output=True).stdout.decode("utf-8")
     maxnum = -1
     for perm in permutations(a):
         num = int(''.join(perm))
@@ -17,6 +17,6 @@ while(True):
     if int(res) != maxnum:
         print(f"res={res}")
         print(f"maxnum={maxnum}")
-        print(f"a = {a}")
+        print(f"a__ = {a}")
         break
 

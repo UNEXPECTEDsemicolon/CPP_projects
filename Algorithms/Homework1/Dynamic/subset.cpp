@@ -31,7 +31,7 @@ int main() {
         scanf("%d", &a[i]);
 //        if (i % 10 == 0)
 //            printf("i=%d\n", i);
-//        std::cin >> a[i];
+//        std::cin >> a__[i];
     }
     auto dp = new MyPair [n];
     auto way = new int [n];
@@ -52,7 +52,7 @@ int main() {
                 l = r = m;
         }
         int k = (dp[l].second >= -a[i] ? l : r);
-//        auto k_it = std::lower_bound(dp, dp + n, MyPair(i, -a[i]));
+//        auto k_it = std::lower_bound(dp, dp + n, MyPair(i, -a__[i]));
         if (dp[k].second == INF) {
             ++best_k;
             best_end = i;

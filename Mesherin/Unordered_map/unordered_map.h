@@ -95,7 +95,7 @@ private:
         Node(const Node&) = default;
         //        Node(Node&&) noexcept = default;
 
-        Node(Node&& source) noexcept: Node(source) { // TODO: test default move constructor
+        Node(Node&& source) noexcept: Node(source) {
             source.prev = nullptr;
             source.next = nullptr;
             source.value = nullptr;
@@ -123,7 +123,7 @@ public:
 
         base_iterator(Node* node) noexcept: node(node) {}
 
-    public: // TODO ?
+    public:
 
         template<class T__, typename = std::enable_if_t<
                 std::is_same<T__, T>::value && std::is_same<T_, const T>::value>>
@@ -329,7 +329,12 @@ public:
     void insert(const const_iterator& it, const T& value) {
         emplace(it, value);
     }
-    void insert(const const_iterator& it, T&& value) noexcept {
+//    void insert(const const_iterator& it, T&& value) noexcept {
+//        emplace(it, std::move(value));
+//    }
+
+    template<typename T_, typename = typename std::enable_if_t<std::is_constructible<T&&, T_&&>::value>>
+    void insert(const const_iterator& it, T_&& value) noexcept {
         emplace(it, std::move(value));
     }
 
@@ -363,11 +368,19 @@ public:
     void push_back(T&& value) noexcept {
         emplace_push_back(std::move(value));
     }
+    template<typename T_, typename = typename std::enable_if_t<std::is_constructible<T&&, T_&&>::value>>
+    void push_back(T_&& value) noexcept {
+        emplace_push_back(std::move(value));
+    }
 
     void push_front(const T& value) {
         emplace_push_front(value);
     }
     void push_front(T&& value) noexcept {
+        emplace_push_front(std::move(value));
+    }
+    template<typename T_, typename = typename std::enable_if_t<std::is_constructible<T&&, T_&&>::value>>
+    void push_front(T_&& value) noexcept {
         emplace_push_front(std::move(value));
     }
 
@@ -516,11 +529,6 @@ public:
 };
 
 
-
-
-////#include "list.h"
-//#include "../List/list.h"
-
 template<class Key,
         class Value,
         class Hash = std::hash<Key>,
@@ -529,7 +537,7 @@ template<class Key,
 class UnorderedMap {
 public:
     using NodeType = std::pair<const Key, Value>;
-//private:
+private:
     static const size_t DEFAULT_BUCKET_SIZE = 10;
     size_t bucket_count = DEFAULT_BUCKET_SIZE;
     float max_load_factor_ = 0.7;
@@ -544,24 +552,10 @@ public:
     Table hash_table = Table(bucket_count, {data.end(), data.end()}, alloc);
 
     size_t get_idx(size_t hash) const noexcept {
-        return hash % bucket_count;
+        return hash % hash_table.size();
     }
 
 public:
-//    class iterator : public DataList::iterator {
-//    public:
-//        iterator(const typename DataList::iterator& it): DataList::iterator::iterator(it) {}
-//        iterator(const iterator& it): DataList::iterator::iterator(it) {}
-//    };
-//
-//    class const_iterator :  public DataList::const_iterator {
-//    public:
-//        const_iterator(const typename DataList::iterator& it): DataList::const_iterator::const_iterator(it) {}
-//        const_iterator(const typename DataList::const_iterator& it): DataList::const_iterator::const_iterator(it) {}
-//        const_iterator(const iterator& it): DataList::const_iterator::const_iterator(it) {}
-//        const_iterator(const const_iterator& it): DataList::const_iterator::const_iterator(it) {}
-//    };
-
     using iterator = typename DataList::iterator;
     using const_iterator = typename DataList::const_iterator;
 
@@ -590,7 +584,7 @@ public:
     }
 
     float load_factor() const noexcept {
-        return float(size()) / bucket_count;
+        return float(size()) / hash_table.size();
     }
 
     float max_load_factor() const noexcept {
@@ -652,7 +646,8 @@ public:
 //        if constexpr (noexcept(hasher()))
 //            easy_rehash(count);
 //        else
-        bad_rehash(count);
+//        bad_rehash(count);
+        easy_rehash(count);
     }
 
     void reserve(size_t count) {
@@ -660,9 +655,12 @@ public:
             rehash(std::ceil(count / max_load_factor_));
     }
 private:
-    iterator find(const Key& key, size_t cur_hash) {
+    iterator find(const Key& key, size_t cur_hash) { // 1428572
         auto begin_ = hash_table[cur_hash].first;
-        auto end_ = hash_table[cur_hash].second + 1;
+        if (begin_ == end())
+            return end();
+        auto end_ = hash_table[cur_hash].second;
+        ++end_;
         for (auto it = begin_; it != end() && it != end_; ++it) {
             if (equaler(it->first, key))
                 return it;
@@ -671,7 +669,10 @@ private:
     }
     const_iterator find(const Key& key, size_t cur_hash) const {
         auto begin_ = hash_table[cur_hash].first;
-        auto end_ = hash_table[cur_hash].second + 1;
+        if (begin_ == end())
+            return end();
+        auto end_ = hash_table[cur_hash].second;
+        ++end_;
         for (auto it = begin_; it != end() && it != end_; ++it) {
             if (equaler(it->first, key))
                 return it;
@@ -690,7 +691,7 @@ private:
     template<class T>
     std::pair<iterator, bool> insert_(T&& pair) {
         if (load_factor() >= max_load_factor_)
-            rehash(bucket_count * 2);
+            rehash(hash_table.size() * 2);
         auto cur_hash = get_idx(hasher(pair.first));
         auto pos = find(pair.first, cur_hash);
         if (pos != end())
@@ -700,7 +701,7 @@ private:
             ++(hash_table[cur_hash].second);
         } else {
             data.push_back(std::forward<T>(pair));
-            hash_table[cur_hash].first = --(hash_table[cur_hash].second); // TODO: check!
+            hash_table[cur_hash].first = --(hash_table[cur_hash].second);
         }
         return {hash_table[cur_hash].second, true};
     }
@@ -714,8 +715,13 @@ public:
         return insert_(std::move(pair));
     }
 
+    template<typename _Pair, typename = typename std::enable_if_t<std::is_constructible<NodeType&&, _Pair&&>::value>>
+    std::pair<iterator, bool> insert(_Pair&& pair) {
+        return insert_(std::forward<_Pair>(pair));
+    }
+
     template<class InputIt>
-    void insert(InputIt first, InputIt last) {
+    void insert(const InputIt& first, const InputIt& last) {
         for (auto it = first; it != last; ++it)
             insert(*it);
     }
@@ -723,23 +729,28 @@ public:
     template<typename... Args>
     std::pair<iterator, bool> emplace(Args&& ... args) {
         if (load_factor() >= max_load_factor_)
-            rehash(bucket_count * 2);
-        data.emplace(data.begin(), std::forward<Args>(args)...); // TODO: template?
-        auto& cur_key = data.begin()->first;
-        auto cur_hash = get_idx(hasher(cur_key));
-        auto pos = find(cur_key, cur_hash);
-        if (pos != end()) {
+            rehash(hash_table.size() * 2);
+        data.emplace(data.begin(), std::forward<Args>(args)...);
+        try {
+            auto& cur_key = data.begin()->first;
+            auto cur_hash = get_idx(hasher(cur_key));
+            auto pos = find(cur_key, cur_hash);
+            if (pos != end() && pos != begin()) {
+                data.pop_front();
+                return {pos, false};
+            }
+            if (hash_table[cur_hash].second != end()) {
+                data.move_node(data.begin(), ++(hash_table[cur_hash].second));
+                --(hash_table[cur_hash].second);
+            } else {
+                data.move_node(data.begin(), end());
+                hash_table[cur_hash].first = --(hash_table[cur_hash].second);
+            }
+            return {hash_table[cur_hash].second, true};
+        } catch (...) {
             data.pop_front();
-            return {pos, false};
+            throw;
         }
-        if (hash_table[cur_hash].second != end()) {
-            data.move_node(data.begin(), hash_table[cur_hash].second + 1);
-            ++(hash_table[cur_hash].second);
-        } else {
-            data.move_node(data.begin(), end());
-            hash_table[cur_hash].first = --(hash_table[cur_hash].second); // TODO: check!
-        }
-        return {hash_table[cur_hash].second, true};
     }
 
     Value& operator[](const Key& key) {
@@ -771,12 +782,20 @@ public:
     }
 
     void erase(const const_iterator& it) noexcept {
+        if (it == end()) return;
+        auto cur_hash = get_idx(hasher(it->first));
+        if (hash_table[cur_hash].second == hash_table[cur_hash].first)
+            hash_table[cur_hash].second = hash_table[cur_hash].first = end();
+        else if (hash_table[cur_hash].second == it)
+            --(hash_table[cur_hash].second);
+        else if (hash_table[cur_hash].first == it)
+            ++(hash_table[cur_hash].first);
         data.erase(it);
     }
 
     void erase(const const_iterator& first, const const_iterator& last) noexcept {
-        for (auto it = first; it != last; ++it)
-            data.erase(it);
+        for (auto it = first; it != last;)
+            erase(it++);
     }
 
     void erase(const Key& key) {
@@ -808,7 +827,7 @@ private:
             bucket_count(source.bucket_count),
             hasher(std::move(source.hasher)),
             equaler(std::move(source.equaler)),
-            alloc(std::forward<Allocator_>(alloc)), // TODO: data's allocs moves?
+            alloc(std::forward<Allocator_>(alloc)),
             data(std::move(source.data)),
             hash_table(std::move(source.hash_table)) {}
 

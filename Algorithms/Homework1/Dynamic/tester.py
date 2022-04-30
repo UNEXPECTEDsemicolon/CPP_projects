@@ -2,7 +2,7 @@ from random import randint
 import subprocess, sys, os, os.path
 from time import time
 
-def test(inp, true_res, name=r'/a.out'):
+def test(inp, true_res, name=r'/a__.out'):
     inp_b = inp.encode('utf-8')
     begin = time()
     fine_res = subprocess.run([os.getcwd() + name],
@@ -17,13 +17,13 @@ def test(inp, true_res, name=r'/a.out'):
 
 n = randint(1, 100000)
 k = randint(1, 15)
-# a = [str(randint(1, s)) for i in range(n)]
-# inp = (f'{n}\n' + ' '.join(a) + f' {s}\n\0')
+# a__ = [str(randint(1, s)) for i in range(n)]
+# inp = (f'{n}\n' + ' '.join(a__) + f' {s}\n\0')
 inp = f'{n} {k}\n'
 # print(inp)
 # inp = inp.encode('utf-8')
 # begin = time()
-# subprocess.run([os.getcwd() + r'/a.out'], input=inp, capture_output=False, text=False)
+# subprocess.run([os.getcwd() + r'/a__.out'], input=inp, capture_output=False, text=False)
 # print(f"time={time()-begin}")
 while True:
     test(inp, )

@@ -28,11 +28,11 @@ while True:
             table[coords[ri][0]][coords[ri][1]] = rw
             inp += f'change {ri + 1} {rw}\n'
     inp_b = inp.encode('utf-8')
-    fine_res = subprocess.run([os.getcwd() + r'/a.out', '>> dev\null'], input=inp_b, capture_output=True).stdout.decode("utf-8")
+    fine_res = subprocess.run([os.getcwd() + r'/a__.out', '>> dev\null'], input=inp_b, capture_output=True).stdout.decode("utf-8")
     good = fine_res == res
     if not good:
         print(inp)
-        print(f'./a.out: <<{fine_res[:20]}>>')
+        print(f'./a__.out: <<{fine_res[:20]}>>')
         print(f'true res: <<{res}>>')
         if not input():
             break

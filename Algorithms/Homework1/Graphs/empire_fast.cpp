@@ -36,7 +36,7 @@ void euler(int v, int**& g, int*& sizes, bool**& used, std::vector<int>& ans) {
 int main() {
     int n, a;
     scanf("%d %d", &n, &a);
-//    std::cin >> n >> a;
+//    std::cin >> n >> a__;
     auto g = new int* [n];
     auto sizes = new int [n];
     auto used = new bool* [n];

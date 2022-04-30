@@ -291,9 +291,9 @@ std::istream &operator>> (std::istream &in, BigInteger &BigInt) {
 }
 
 //int main() {
-//    auto a = BigInteger("123456789123456789");
-//    BigInteger a("12345678912346565341653465413");
+//    auto a__ = BigInteger("123456789123456789");
+//    BigInteger a__("12345678912346565341653465413");
 //    BigInteger b;
-//    a.show();
+//    a__.show();
 //    std::cout << (bool)b << '\n';
 //}

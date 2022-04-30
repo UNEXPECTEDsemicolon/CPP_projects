@@ -21,7 +21,7 @@ while True:
         inp += ' '.join(map(str, matrix[i])) + '\n'
     inp_b = inp.encode('utf-8')
     begin = time()
-    fine_res = subprocess.run([os.getcwd() + r'/a.out', '>> dev\null'],
+    fine_res = subprocess.run([os.getcwd() + r'/a__.out', '>> dev\null'],
                               input=inp_b, capture_output=True).stdout.decode("utf-8")
     end = time()
     if int(fine_res.strip("\n ")) != true_res:

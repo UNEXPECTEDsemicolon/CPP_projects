@@ -22,7 +22,7 @@ while True:
     with open("matrix.in", 'wb') as f:
         f.write(inp_b)
     # begin = time()
-    err = subprocess.run([os.getcwd() + r'/a.out', '>> dev\null']).returncode
+    err = subprocess.run([os.getcwd() + r'/a__.out', '>> dev\null']).returncode
     if round(np.linalg.det(matrix), 5) == 0.0:
         continue
     else:

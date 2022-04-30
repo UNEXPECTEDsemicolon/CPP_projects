@@ -40,7 +40,7 @@ void euler(int v, std::vector<std::vector<int>>& g, bool**& used, std::vector<in
 int main() {
     int n, a;
     scanf("%d %d", &n, &a);
-//    std::cin >> n >> a;
+//    std::cin >> n >> a__;
     auto g = std::vector<std::vector<int>>(n, std::vector<int>());
     auto used = new bool* [n];
     for (int i = 0; i < n; ++i) {

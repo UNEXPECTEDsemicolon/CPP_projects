@@ -1,7 +1,7 @@
 import subprocess, os.path
 
 
-def test(inp, true_res, name=r'/a.out'):
+def test(inp, true_res, name=r'/a__.out'):
     while True:
         inp_b = inp.encode('utf-8')
         fine_res = subprocess.run([os.getcwd() + name],

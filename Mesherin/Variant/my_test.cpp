@@ -12,6 +12,7 @@ int main() {
     {
 //        const int x = 5;
 //        Variant<int, float> v(5.4);
+//        Variant<int, double> v(5.4f);
 //        std::cout << VariantAlternative<int, int, double>::constructible_check<float, int, double>::value << '\n';
 //        v = Variant<int, double>(1.3);
 //        std::cout << get<1>(v) << '\n';
@@ -20,9 +21,14 @@ int main() {
     }
 
     {
-        Variant<const int, /*int,*/ std::string, const std::string, double> v = 1;
-        std::cout << v.index() << '\n';
+//        Variant<const int, /*int,*/ std::string, const std::string, double> v = 1;
+        Variant<const int, /*int,*/ std::string,/* const std::string,*/ double> v = 1;
+//        std::cout << std::is_same<decltype(get<0>(v)), const int&>::value << '\n';
 //        Variant<int, std::string, double> v("abc");
-//        v = "abc";
+        v = "abc";
+    }
+    {
+//        Variant<std::string, char, std::vector<int>> v = "abcdefgh";
+//        v = 'a';
     }
 }

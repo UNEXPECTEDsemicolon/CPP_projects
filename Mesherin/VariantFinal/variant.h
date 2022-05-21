@@ -44,10 +44,10 @@ struct VariantAlternative {
         return static_cast<Derived*>(this);
     }
 
-    VariantAlternative() {}
+    VariantAlternative() = default;
 
     VariantAlternative(const VariantAlternative&) = default;
-    VariantAlternative(VariantAlternative&&) = default;
+    VariantAlternative(VariantAlternative&&) noexcept = default;
 
     template <typename T_>
     void init_by_value(T_&& value) {
@@ -61,7 +61,7 @@ struct VariantAlternative {
         init_by_value(value);
     }
 
-    VariantAlternative(T&& value) {
+    VariantAlternative(std::remove_const_t<T>&& value) {
         init_by_value(std::move(value));
     }
 
@@ -126,7 +126,7 @@ private:
 
     template<typename... Ts>
     union VariadicUnion {
-        void swap(VariadicUnion&, size_t) noexcept {}
+        void swap(VariadicUnion&, size_t, size_t) noexcept {}
 
         template <typename VarUnion>
         void copy_VarUnion(VarUnion&&, size_t) {}
@@ -150,11 +150,14 @@ private:
 
         VariadicUnion() {}
 
-        void swap(VariadicUnion& right, size_t right_current = 0) noexcept {
+        void swap(VariadicUnion& right, size_t this_current, size_t right_current) noexcept {
             if (right_current == 0) {
-                std::swap(head, right.head);
+                if (this_current == right_current)
+                    std::swap(head, right.head);
+                else
+                    new (std::launder(&(head))) NonconstHead(std::move(right.head));
             } else
-                tail.swap(right.tail, right_current - 1);
+                tail.swap(right.tail, this_current - 1, right_current - 1);
         }
 
         template <typename VarUnion>
@@ -207,20 +210,25 @@ private:
 
 public:
     void swap(Variant& right) noexcept {
-        storage.swap(right.storage, right.current);
-        std::swap(current, right.current);
+        if (current != right.current)
+            storage.destroy(current);
+        storage.swap(right.storage, current, right.current);
         std::swap(is_empty, right.is_empty);
+        if (current == right.current)
+            std::swap(current, right.current);
+        else
+            current = right.current;
     }
 
     Variant(const Variant& source)
         : VariantAlternative<Types, Types...>::template VariantAlternative<Types, Types...>(source)...,
-        current(source.current), is_empty(source.current) {
+        current(source.current), is_empty(source.is_empty) {
         storage.copy_VarUnion(source.storage, source.current);
     }
 
     Variant(Variant&& source)
         :VariantAlternative<Types, Types...>::template VariantAlternative<Types, Types...>(std::move(source))...,
-        current(source.current), is_empty(source.current) {
+        current(source.current), is_empty(source.is_empty) {
         storage.copy_VarUnion(std::move(source).storage, source.current);
         source.is_empty = true;
     }

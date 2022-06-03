@@ -3,149 +3,149 @@ project(CPP_projects)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(Algorithms/Homework1)
-include_directories(Algorithms/Homework1/AVL)
-include_directories(Algorithms/Homework1/Babichev)
-include_directories(Algorithms/Homework1/Dynamic)
-include_directories(Algorithms/Homework1/fenvic)
-include_directories(Algorithms/Homework1/Graphs)
-include_directories(Algorithms/Homework1/LineAge)
-include_directories(Algorithms/Homework1/qsort)
+include_directories(Algorithms)
+include_directories(Algorithms/AVL)
+include_directories(Algorithms/Babichev)
+include_directories(Algorithms/Dynamic)
+include_directories(Algorithms/fenvic)
+include_directories(Algorithms/Graphs)
+include_directories(Algorithms/LineAge)
+include_directories(Algorithms/qsort)
 
-include_directories(Mesherin/biginteger)
-include_directories(Mesherin/biginteger/long_arithm)
-include_directories(Mesherin/deque)
-include_directories(Mesherin/deque/haha)
-include_directories(Mesherin/geometry)
-include_directories(Mesherin/List)
-include_directories(Mesherin/matrix)
-include_directories(Mesherin/matrix/haha)
-include_directories(Mesherin/string)
-include_directories(Mesherin/SharedPtr)
+include_directories(CPP/biginteger)
+include_directories(CPP/biginteger/long_arithm)
+include_directories(CPP/deque)
+include_directories(CPP/deque/haha)
+include_directories(CPP/geometry)
+include_directories(CPP/List)
+include_directories(CPP/matrix)
+include_directories(CPP/matrix/haha)
+include_directories(CPP/string)
+include_directories(CPP/SharedPtr)
 
 add_executable(CPP_projects
-        Algorithms/Homework1/AVL/avl.cpp
-        Algorithms/Homework1/Babichev/battle.cpp
-        Algorithms/Homework1/Babichev/bits.cpp
-        Algorithms/Homework1/Babichev/book.cpp
-        Algorithms/Homework1/Babichev/brackets.cpp
-        Algorithms/Homework1/Babichev/brackets_stack.cpp
-        Algorithms/Homework1/Babichev/brokers.cpp
-        Algorithms/Homework1/Babichev/diplomas.cpp
-        Algorithms/Homework1/Babichev/ES.cpp
-        Algorithms/Homework1/Babichev/greatest_k.cpp
-        Algorithms/Homework1/Babichev/greatest_k2.cpp
-        Algorithms/Homework1/Babichev/greatest_k3.cpp
-        Algorithms/Homework1/Babichev/histogram.cpp
-        Algorithms/Homework1/Babichev/histogram2.cpp
-        Algorithms/Homework1/Babichev/inversions.cpp
-        Algorithms/Homework1/Babichev/main.cpp
-        Algorithms/Homework1/Babichev/median.cpp
-        Algorithms/Homework1/Babichev/merge.cpp
-        Algorithms/Homework1/Babichev/minmax.cpp
-        Algorithms/Homework1/Babichev/mystack.cpp
-        Algorithms/Homework1/Babichev/pair-sum.cpp
-        Algorithms/Homework1/Babichev/RMQ.cpp
-        Algorithms/Homework1/Babichev/stack_postfix.cpp
-        Algorithms/Homework1/Babichev/vega.cpp
-        Algorithms/Homework1/Dynamic/bankomat.cpp
-        Algorithms/Homework1/Dynamic/bankomat2.cpp
-        Algorithms/Homework1/Dynamic/cosmozoo.cpp
-        Algorithms/Homework1/Dynamic/decompositions.cpp
-        Algorithms/Homework1/Dynamic/gvozd.cpp
-        Algorithms/Homework1/Dynamic/ics.cpp
-        Algorithms/Homework1/Dynamic/krat.cpp
-        Algorithms/Homework1/Dynamic/peace.cpp
-        Algorithms/Homework1/Dynamic/phone.cpp
-        Algorithms/Homework1/Dynamic/post.cpp
-        Algorithms/Homework1/Dynamic/sailfish.cpp
-        Algorithms/Homework1/Dynamic/sequence.cpp
-        Algorithms/Homework1/Dynamic/squares.cpp
-        Algorithms/Homework1/Dynamic/subset.cpp
-        Algorithms/Homework1/Dynamic/subset2.cpp
-        Algorithms/Homework1/Dynamic/subset_fast.cpp
-        Algorithms/Homework1/Dynamic/triangle.cpp
-        Algorithms/Homework1/Dynamic/ways.cpp
-        Algorithms/Homework1/fenvic/bigbrother.cpp
-        Algorithms/Homework1/fenvic/bigbrother2.cpp
-        Algorithms/Homework1/fenvic/bigbrother3.cpp
-        Algorithms/Homework1/fenvic/bigbrother4.cpp
-        Algorithms/Homework1/fenvic/fffenwik.cpp
-        Algorithms/Homework1/fenvic/include.cpp
-        Algorithms/Homework1/fenvic/peremen.cpp
-        Algorithms/Homework1/fenvic/rvq.cpp
-        Algorithms/Homework1/fenvic/stars.cpp
-        Algorithms/Homework1/fenvic/structure.cpp
-        Algorithms/Homework1/Graphs/eulerian.cpp
-        Algorithms/Homework1/Graphs/graph_1.cpp
-        Algorithms/Homework1/Graphs/graph_2.cpp
-        Algorithms/Homework1/Graphs/graph_4.cpp
-        Algorithms/Homework1/Graphs/dijkstra.cpp
-        Algorithms/Homework1/Graphs/love.cpp
-        Algorithms/Homework1/LineAge/A3.cpp
-        Algorithms/Homework1/LineAge/B3.cpp
-        Algorithms/Homework1/LineAge/C3.cpp
-        Algorithms/Homework1/LineAge/cmi.cpp
-        Algorithms/Homework1/LineAge/comet.cpp
-        Algorithms/Homework1/LineAge/D3.cpp
-        Algorithms/Homework1/LineAge/E3.cpp
-        Algorithms/Homework1/LineAge/F3.cpp
-        Algorithms/Homework1/LineAge/G3.cpp
-        Algorithms/Homework1/LineAge/H3.cpp
-        Algorithms/Homework1/LineAge/I3.cpp
-        Algorithms/Homework1/LineAge/matrices.cpp
-        Algorithms/Homework1/qsort/1.cpp
-        Algorithms/Homework1/qsort/3.cpp
-        Algorithms/Homework1/qsort/antiqsort.cpp
-        Algorithms/Homework1/qsort/binomheap.cpp
-        Algorithms/Homework1/qsort/first.cpp
-        Algorithms/Homework1/qsort/flat.cpp
-        Algorithms/Homework1/qsort/heap.cpp
-        Algorithms/Homework1/qsort/k_order_stat.cpp
-        Algorithms/Homework1/qsort/layer.cpp
-        Algorithms/Homework1/qsort/LSD.cpp
-        Algorithms/Homework1/qsort/minmax.cpp
-        Algorithms/Homework1/qsort/number.cpp
-        Algorithms/Homework1/qsort/table.cpp
-        Algorithms/Homework1/adiv.cpp
-        Algorithms/Homework1/SET.cpp
-        Mesherin/argv/1.0.cpp
-        Mesherin/biginteger/long_arithm/bn.h
-        Mesherin/biginteger/long_arithm/div.cpp
-        Mesherin/biginteger/long_arithm/fib.cpp
-        Mesherin/biginteger/long_arithm/main.cpp
-        Mesherin/biginteger/long_arithm/test.cpp
-        Mesherin/biginteger/1.2.1.cpp
-        Mesherin/biginteger/1.2.2.cpp
-        Mesherin/biginteger/1.2.cpp
-        Mesherin/biginteger/biginteger.h
-        Mesherin/biginteger/temp_mul.cpp
-        Mesherin/deque/haha/deque.h
-        Mesherin/deque/haha/matrix.h
-        Mesherin/deque/deque.h
-        Mesherin/deque/deque2.h
-        Mesherin/deque/deque7.h
-        Mesherin/deque/deque_test.cpp
-        Mesherin/deque/deque_test.h
-        Mesherin/deque/deque_with_good_pop.h
-        Mesherin/deque/test.cpp
-        Mesherin/geometry/1.4.cpp
-        Mesherin/geometry/geometry.h
-        Mesherin/geometry/geometry_test.cpp
-        Mesherin/List/alloc_test.cpp
-        Mesherin/List/enable_if_test.cpp
-        Mesherin/List/hello_world.cpp
-        Mesherin/List/list.h
-        Mesherin/List/list0.h
-        Mesherin/List/list3.h
-        Mesherin/List/Node_swap.h
-        Mesherin/List/stackallocator.cpp
-        Mesherin/List/stackallocator_test.cpp
-        Mesherin/List/strange_test.cpp
-        Mesherin/matrix/haha/deque.h
-        Mesherin/matrix/haha/matrix.h
-        Mesherin/matrix/1.3.cpp
-        Mesherin/matrix/1.3_no_inheritance.cpp
-        Mesherin/matrix/matrix.h
-        Mesherin/matrix/matrix_test.cpp
-        Mesherin/string/string.h Algorithms/Homework1/Graphs/ancestor.cpp Algorithms/Homework1/Graphs/loop.cpp Algorithms/Homework1/Graphs/top.cpp Algorithms/Homework1/Graphs/lockdown.cpp Algorithms/Homework1/Graphs/isolation2.cpp Algorithms/Homework1/Graphs/empire.cpp Algorithms/Homework1/Graphs/territory.cpp Algorithms/Homework1/Graphs/territory_OOP.cpp Mesherin/List/test_asdfghjk.cpp Mesherin/Unordered_map/my_test.cpp Mesherin/Unordered_map/unordered_map.h Mesherin/Unordered_map/haha/unordered_map.h Algorithms/Homework1/Graphs/E.cpp Algorithms/Homework1/Graphs/knight.cpp Algorithms/Homework1/Graphs/excursion.cpp Mesherin/SharedPtr/smart_pointers.h Mesherin/SharedPtr/my_test.cpp Mesherin/SharedPtr/strange_test.cpp Mesherin/Variant/my_variant.h Mesherin/Variant/my_variant.h Mesherin/Variant/my_test.cpp Mesherin/Vector/vector.h Mesherin/Vector/my_test.cpp Mesherin/Variant/strange_test.cpp Algorithms/Homework1/LineAge/denis.cpp)
+        Algorithms/AVL/avl.cpp
+        Algorithms/Babichev/battle.cpp
+        Algorithms/Babichev/bits.cpp
+        Algorithms/Babichev/book.cpp
+        Algorithms/Babichev/brackets.cpp
+        Algorithms/Babichev/brackets_stack.cpp
+        Algorithms/Babichev/brokers.cpp
+        Algorithms/Babichev/diplomas.cpp
+        Algorithms/Babichev/ES.cpp
+        Algorithms/Babichev/greatest_k.cpp
+        Algorithms/Babichev/greatest_k2.cpp
+        Algorithms/Babichev/greatest_k3.cpp
+        Algorithms/Babichev/histogram.cpp
+        Algorithms/Babichev/histogram2.cpp
+        Algorithms/Babichev/inversions.cpp
+        Algorithms/Babichev/main.cpp
+        Algorithms/Babichev/median.cpp
+        Algorithms/Babichev/merge.cpp
+        Algorithms/Babichev/minmax.cpp
+        Algorithms/Babichev/mystack.cpp
+        Algorithms/Babichev/pair-sum.cpp
+        Algorithms/Babichev/RMQ.cpp
+        Algorithms/Babichev/stack_postfix.cpp
+        Algorithms/Babichev/vega.cpp
+        Algorithms/Dynamic/bankomat.cpp
+        Algorithms/Dynamic/bankomat2.cpp
+        Algorithms/Dynamic/cosmozoo.cpp
+        Algorithms/Dynamic/decompositions.cpp
+        Algorithms/Dynamic/gvozd.cpp
+        Algorithms/Dynamic/ics.cpp
+        Algorithms/Dynamic/krat.cpp
+        Algorithms/Dynamic/peace.cpp
+        Algorithms/Dynamic/phone.cpp
+        Algorithms/Dynamic/post.cpp
+        Algorithms/Dynamic/sailfish.cpp
+        Algorithms/Dynamic/sequence.cpp
+        Algorithms/Dynamic/squares.cpp
+        Algorithms/Dynamic/subset.cpp
+        Algorithms/Dynamic/subset2.cpp
+        Algorithms/Dynamic/subset_fast.cpp
+        Algorithms/Dynamic/triangle.cpp
+        Algorithms/Dynamic/ways.cpp
+        Algorithms/fenvic/bigbrother.cpp
+        Algorithms/fenvic/bigbrother2.cpp
+        Algorithms/fenvic/bigbrother3.cpp
+        Algorithms/fenvic/bigbrother4.cpp
+        Algorithms/fenvic/fffenwik.cpp
+        Algorithms/fenvic/include.cpp
+        Algorithms/fenvic/peremen.cpp
+        Algorithms/fenvic/rvq.cpp
+        Algorithms/fenvic/stars.cpp
+        Algorithms/fenvic/structure.cpp
+        Algorithms/Graphs/eulerian.cpp
+        Algorithms/Graphs/graph_1.cpp
+        Algorithms/Graphs/graph_2.cpp
+        Algorithms/Graphs/graph_4.cpp
+        Algorithms/Graphs/dijkstra.cpp
+        Algorithms/Graphs/love.cpp
+        Algorithms/LineAge/A3.cpp
+        Algorithms/LineAge/B3.cpp
+        Algorithms/LineAge/C3.cpp
+        Algorithms/LineAge/cmi.cpp
+        Algorithms/LineAge/comet.cpp
+        Algorithms/LineAge/D3.cpp
+        Algorithms/LineAge/E3.cpp
+        Algorithms/LineAge/F3.cpp
+        Algorithms/LineAge/G3.cpp
+        Algorithms/LineAge/H3.cpp
+        Algorithms/LineAge/I3.cpp
+        Algorithms/LineAge/matrices.cpp
+        Algorithms/qsort/1.cpp
+        Algorithms/qsort/3.cpp
+        Algorithms/qsort/antiqsort.cpp
+        Algorithms/qsort/binomheap.cpp
+        Algorithms/qsort/first.cpp
+        Algorithms/qsort/flat.cpp
+        Algorithms/qsort/heap.cpp
+        Algorithms/qsort/k_order_stat.cpp
+        Algorithms/qsort/layer.cpp
+        Algorithms/qsort/LSD.cpp
+        Algorithms/qsort/minmax.cpp
+        Algorithms/qsort/number.cpp
+        Algorithms/qsort/table.cpp
+        Algorithms/adiv.cpp
+        Algorithms/SET.cpp
+        CPP/argv/1.0.cpp
+        CPP/biginteger/long_arithm/bn.h
+        CPP/biginteger/long_arithm/div.cpp
+        CPP/biginteger/long_arithm/fib.cpp
+        CPP/biginteger/long_arithm/main.cpp
+        CPP/biginteger/long_arithm/test.cpp
+        CPP/biginteger/1.2.1.cpp
+        CPP/biginteger/1.2.2.cpp
+        CPP/biginteger/1.2.cpp
+        CPP/biginteger/biginteger.h
+        CPP/biginteger/temp_mul.cpp
+        CPP/deque/haha/deque.h
+        CPP/deque/haha/matrix.h
+        CPP/deque/deque.h
+        CPP/deque/deque2.h
+        CPP/deque/deque7.h
+        CPP/deque/deque_test.cpp
+        CPP/deque/deque_test.h
+        CPP/deque/deque_with_good_pop.h
+        CPP/deque/test.cpp
+        CPP/geometry/1.4.cpp
+        CPP/geometry/geometry.h
+        CPP/geometry/geometry_test.cpp
+        CPP/List/alloc_test.cpp
+        CPP/List/enable_if_test.cpp
+        CPP/List/hello_world.cpp
+        CPP/List/list.h
+        CPP/List/list0.h
+        CPP/List/list3.h
+        CPP/List/Node_swap.h
+        CPP/List/stackallocator.cpp
+        CPP/List/stackallocator_test.cpp
+        CPP/List/strange_test.cpp
+        CPP/matrix/haha/deque.h
+        CPP/matrix/haha/matrix.h
+        CPP/matrix/1.3.cpp
+        CPP/matrix/1.3_no_inheritance.cpp
+        CPP/matrix/matrix.h
+        CPP/matrix/matrix_test.cpp
+        CPP/string/string.h Algorithms/Graphs/ancestor.cpp Algorithms/Graphs/loop.cpp Algorithms/Graphs/top.cpp Algorithms/Graphs/lockdown.cpp Algorithms/Graphs/isolation2.cpp Algorithms/Graphs/empire.cpp Algorithms/Graphs/territory.cpp Algorithms/Graphs/territory_OOP.cpp CPP/List/test_asdfghjk.cpp CPP/Unordered_map/my_test.cpp CPP/Unordered_map/unordered_map.h CPP/Unordered_map/haha/unordered_map.h Algorithms/Graphs/E.cpp Algorithms/Graphs/knight.cpp Algorithms/Graphs/excursion.cpp CPP/SharedPtr/smart_pointers.h CPP/SharedPtr/my_test.cpp CPP/SharedPtr/strange_test.cpp CPP/Variant/my_variant.h CPP/Variant/my_variant.h CPP/Variant/my_test.cpp CPP/Vector/vector.h CPP/Vector/my_test.cpp CPP/Variant/strange_test.cpp Algorithms/LineAge/denis.cpp Intern/Kasp/test1.cpp Intern/Kasp/test2.cpp Intern/Kasp/C_reverse.cpp)

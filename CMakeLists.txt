@@ -13,13 +13,13 @@ include_directories(Algorithms/LineAge)
 include_directories(Algorithms/qsort)
 
 include_directories(CPP/biginteger)
-include_directories(CPP/biginteger/long_arithm)
+include_directories(CPP/biginteger/Debug/long_arithm)
 include_directories(CPP/deque)
-include_directories(CPP/deque/haha)
+include_directories(CPP/deque/Debug/haha)
 include_directories(CPP/geometry)
 include_directories(CPP/List)
 include_directories(CPP/matrix)
-include_directories(CPP/matrix/haha)
+include_directories(CPP/matrix/Debug/haha)
 include_directories(CPP/string)
 include_directories(CPP/SharedPtr)
 
@@ -110,42 +110,42 @@ add_executable(CPP_projects
         Algorithms/adiv.cpp
         Algorithms/SET.cpp
         CPP/argv/1.0.cpp
-        CPP/biginteger/long_arithm/bn.h
-        CPP/biginteger/long_arithm/div.cpp
-        CPP/biginteger/long_arithm/fib.cpp
-        CPP/biginteger/long_arithm/main.cpp
-        CPP/biginteger/long_arithm/test.cpp
-        CPP/biginteger/1.2.1.cpp
-        CPP/biginteger/1.2.2.cpp
-        CPP/biginteger/1.2.cpp
-        CPP/biginteger/biginteger.h
-        CPP/biginteger/temp_mul.cpp
-        CPP/deque/haha/deque.h
-        CPP/deque/haha/matrix.h
-        CPP/deque/deque.h
-        CPP/deque/deque2.h
-        CPP/deque/deque7.h
-        CPP/deque/deque_test.cpp
-        CPP/deque/deque_test.h
-        CPP/deque/deque_with_good_pop.h
-        CPP/deque/test.cpp
-        CPP/geometry/1.4.cpp
-        CPP/geometry/geometry.h
-        CPP/geometry/geometry_test.cpp
-        CPP/List/alloc_test.cpp
-        CPP/List/enable_if_test.cpp
-        CPP/List/hello_world.cpp
-        CPP/List/list.h
-        CPP/List/list0.h
-        CPP/List/list3.h
-        CPP/List/Node_swap.h
-        CPP/List/stackallocator.cpp
-        CPP/List/stackallocator_test.cpp
-        CPP/List/strange_test.cpp
-        CPP/matrix/haha/deque.h
-        CPP/matrix/haha/matrix.h
-        CPP/matrix/1.3.cpp
-        CPP/matrix/1.3_no_inheritance.cpp
-        CPP/matrix/matrix.h
-        CPP/matrix/matrix_test.cpp
-        CPP/string/string.h Algorithms/Graphs/ancestor.cpp Algorithms/Graphs/loop.cpp Algorithms/Graphs/top.cpp Algorithms/Graphs/lockdown.cpp Algorithms/Graphs/isolation2.cpp Algorithms/Graphs/empire.cpp Algorithms/Graphs/territory.cpp Algorithms/Graphs/territory_OOP.cpp CPP/List/test_asdfghjk.cpp CPP/Unordered_map/my_test.cpp CPP/Unordered_map/unordered_map.h CPP/Unordered_map/haha/unordered_map.h Algorithms/Graphs/E.cpp Algorithms/Graphs/knight.cpp Algorithms/Graphs/excursion.cpp CPP/SharedPtr/smart_pointers.h CPP/SharedPtr/my_test.cpp CPP/SharedPtr/strange_test.cpp CPP/Variant/my_variant.h CPP/Variant/my_variant.h CPP/Variant/my_test.cpp CPP/Vector/vector.h CPP/Vector/my_test.cpp CPP/Variant/strange_test.cpp Algorithms/LineAge/denis.cpp Intern/Kasp/test1.cpp Intern/Kasp/test2.cpp Intern/Kasp/C_reverse.cpp)
+        CPP/biginteger/Debug/long_arithm/bn.h
+        CPP/biginteger/Debug/long_arithm/div.cpp
+        CPP/biginteger/Debug/long_arithm/fib.cpp
+        CPP/biginteger/Debug/long_arithm/main.cpp
+        CPP/biginteger/Debug/long_arithm/test.cpp
+        CPP/biginteger/Debug/1.2.1.cpp
+        CPP/biginteger/Debug/1.2.2.cpp
+        CPP/biginteger/Debug/1.2.cpp
+        CPP/biginteger/Debug/biginteger.h
+        CPP/biginteger/Debug/temp_mul.cpp
+        CPP/deque/Debug/haha/deque.h
+        CPP/deque/Debug/haha/matrix.h
+        CPP/deque/Debug/deque.h
+        CPP/deque/Debug/deque2.h
+        CPP/deque/Debug/deque7.h
+        CPP/deque/Debug/deque_test.cpp
+        CPP/deque/Debug/deque_test.h
+        CPP/deque/Debug/deque_with_good_pop.h
+        CPP/deque/Debug/test.cpp
+        CPP/geometry/Debug/1.4.cpp
+        CPP/geometry/Debug/geometry.h
+        CPP/geometry/Debug/geometry_test.cpp
+        CPP/List/Debug/alloc_test.cpp
+        CPP/List/Debug/enable_if_test.cpp
+        CPP/List/Debug/hello_world.cpp
+        CPP/List/Debug/list.h
+        CPP/List/Debug/list0.h
+        CPP/List/Debug/list3.h
+        CPP/List/Debug/Node_swap.h
+        CPP/List/Debug/stackallocator.cpp
+        CPP/List/Debug/stackallocator_test.cpp
+        CPP/List/Debug/strange_test.cpp
+        CPP/matrix/Debug/haha/deque.h
+        CPP/matrix/Debug/haha/matrix.h
+        CPP/matrix/Debug/1.3.cpp
+        CPP/matrix/Debug/1.3_no_inheritance.cpp
+        CPP/matrix/Debug/matrix.h
+        CPP/matrix/Debug/matrix_test.cpp
+        CPP/string/string.h Algorithms/Graphs/ancestor.cpp Algorithms/Graphs/loop.cpp Algorithms/Graphs/top.cpp Algorithms/Graphs/lockdown.cpp Algorithms/Graphs/isolation2.cpp Algorithms/Graphs/empire.cpp Algorithms/Graphs/territory.cpp Algorithms/Graphs/territory_OOP.cpp CPP/List/Debug/test_asdfghjk.cpp CPP/Unordered_map/Debug/my_test.cpp CPP/Unordered_map/Debug/unordered_map.h CPP/Unordered_map/Debug/haha/unordered_map.h Algorithms/Graphs/E.cpp Algorithms/Graphs/knight.cpp Algorithms/Graphs/excursion.cpp CPP/SharedPtr/Debug/smart_pointers.h CPP/SharedPtr/Debug/my_test.cpp CPP/SharedPtr/Debug/strange_test.cpp CPP/Variant/my_variant.h CPP/Variant/my_variant.h CPP/Variant/Debug/my_test.cpp CPP/Vector/Debug/vector.h CPP/Vector/Debug/my_test.cpp CPP/Variant/Debug/strange_test.cpp Algorithms/LineAge/denis.cpp Intern/Kasp/test1.cpp Intern/Kasp/test2.cpp Intern/Kasp/C_reverse.cpp CPP/List/list.h)

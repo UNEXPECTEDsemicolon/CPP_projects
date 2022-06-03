@@ -3,7 +3,7 @@ project(Variant)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories(.)
+include_directories(..)
 
 add_executable(Variant
         variant_test.cpp

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <cmath>
-#include "../biginteger/biginteger.h"
+#include "../../biginteger/Debug/biginteger.h"
 
 template<size_t N, size_t K>
 struct IsPrimeHelper {

@@ -5,7 +5,7 @@
 #include <vector>
 #include <cmath>
 //#include "list.h"
-#include "../List/list.h"
+#include "../../List/Debug/list.h"
 
 template<class Key,
          class Value,
